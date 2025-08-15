@@ -35,12 +35,6 @@ class userDAO {
                     password: '$2b$10$iYSJ.k77iGk4ZiWnbzb60u3GWpM8KmiW1a9vHMMxChjUchJmUbclG',
                     role: 'administrator',
                     familyId: 'family_2',
-                },
-                {
-                    user: 'Admin3',
-                    password: "$2b$10$iYSJ.k77iGk4ZiWnbzb60u3GWpM8KmiW1a9vHMMxChjUchJmUbclG",
-                    role: 'organiser',
-                    familyId: 'family_3',
                 }
             ];
             defaultAdmins.forEach(admin => {

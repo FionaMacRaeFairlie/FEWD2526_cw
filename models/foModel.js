@@ -22,7 +22,7 @@ class FamilyOrganiser {
             // Insert default events
             this.db.insert({
                 event: 'Swimming',
-                description: 'Family fun in the pool',
+                description: 'Family trip',
                 requiredItems: 'costume, towel',
                 location: 'Sports Centre',
                 date: '2025-09-16',
@@ -35,14 +35,14 @@ class FamilyOrganiser {
 
             this.db.insert({
                 event: 'gym',
-                description: 'get back into shape',
+                description: 'keep fit class',
                 requiredItems: 'Gym clothes, towel, water bottle, coin for locker',
                 location: 'Regional Sports Facility',
                 date: '2025-08-25',
                 startTime: '18:00',
                 endTime: '19:30',
                 eventType: 'recurring',
-                organiser: 'Admin2',
+                organiser: 'Admin1',
                 familyId: 'family_1'
             });
             console.log('Events database initialized with default events');
