@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    {{>partials/header}}
+</head>
+
+<body class="container">
+    <h1>{{title}}</h1>
+
+    <form method="post" action="/register">
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Personal Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Username *</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Choose a username" required>
+                            <small class="form-text text-muted">This will be used to log in</small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="familyId">Enter a name for your family group *</label>
+                            <input type="text"  class="form-control" id="familyId" name="familyId"
+                                required>
+                            <small class="form-text text-muted">Enter a unique string to identify your family</small>
+                        </div>
+                    </div>
+                    <p> You will be able to set up login for other family members once the initial registration process
+                        is complete </p>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pass">Password *</label>
+                            <input type="password" class="form-control" id="pass" name="pass"
+                                placeholder="Enter a secure password" minlength="8" required>
+                            <small class="form-text text-muted">Minimum 8 characters</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                                placeholder="Re-enter your password" minlength="8" required>
+                        </div>
+                    </div>
+
+                </div>
+
+</div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        
+    </form>
+
+    <script>
+
+        document.getElementById('confirmPassword').addEventListener('input', function () {
+            const password = document.getElementById('pass').value;
+            const confirmPassword = this.value;
+
+            if (password !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        document.getElementById('pass').addEventListener('input', function () {
+            const confirmPassword = document.getElementById('confirmPassword');
+            if (confirmPassword.value) {
+                confirmPassword.dispatchEvent(new Event('input'));
+            }
+        });
+    </script>
+</body>
+
+</html>

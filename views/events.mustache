@@ -1,0 +1,68 @@
+<html>
+<head>
+  {{>partials/header}}
+</head>
+<body class="container">
+  <h1>{{title}}</h1>
+  
+  <div class="text-end" style="margin-bottom: 1em;">
+  {{^user}}
+    <a id="register" href="/register" class="btn btn-primary">Register</a>
+    <a id="login" href="/login" class="btn btn-primary ms-2">Sign in</a>
+  {{/user}}
+
+  {{#user}}
+    <a href="/events" class="btn btn-primary  ms-2">View Events</a>
+    <a href="/new-event-entry" class="btn btn-info ms-2">Create an Event</a>
+    <a href="/manage-users" class="btn btn-success ms-2">Manage Family</a>
+    <a id="logout" href="/logout" class="btn btn-danger ms-2">Sign out</a>
+   Hi {{user}} {{family}} {{role}} 
+  {{/user}}
+
+  </div>
+
+  {{#events}}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4 class="card-title">{{event}}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{date}} • {{startTime}} - {{endTime}}
+        {{#location}} • {{location}}{{/location}}
+      </h6>
+      
+      <p class="card-text">{{#participants}}{{.}}&nbsp;{{/participants}}</p>
+      <p class="card-text">{{description}}</p>
+      
+      {{#requiredItems}}
+      <div class="alert alert-info" role="alert">
+        <strong>Equipment needed:</strong> {{requiredItems}}
+      </div>
+      {{/requiredItems}}
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">
+          Organised by {{organiser}}
+          {{#eventType}} • {{eventType}} event{{/eventType}}
+        </small>
+        
+        {{#canEdit}}
+        <div class="btn-group btn-group-sm" role="group">
+          <a href="/edit-event/{{_id}}" class="btn btn-outline-secondary">Edit</a>
+          <a href="/delete-event/{{_id}}" class="btn btn-outline-danger" 
+             onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+        </div>
+        {{/canEdit}}
+      </div>
+    </div>
+  </div>
+  {{/events}}
+  
+  {{^events}}
+    <div class="alert alert-secondary" role="alert">
+      Login to view and create events. 
+    </div>
+  {{/events}}
+  
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    {{>partials/header}}
+</head>
+
+<body class="container">
+    <h1>{{title}}</h1>
+    {{#error}}
+    <div class="alert alert-danger mt-3" role="alert">
+        Invalid username or password.
+    </div>
+    {{/error}}
+
+    <form method="POST" action="/login">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Log in</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">
+                                User Name
+                            </label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="family">
+                                Family identifier
+                            </label>
+                            <input type="text" class="form-control" id="family" name="family"
+                                placeholder="Family identifier">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="password">
+                        </div>
+                    </div>
+                </div>
+
+
+                <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+    </form>
+    </div>
+
+</body>
+
+</html>

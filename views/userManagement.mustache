@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>partials/header}}
+</head>
+<body class="container">
+
+        <h1>{{title}}</h1>
+
+  <div class="text-end" style="margin-bottom: 1em;">
+  {{^user}}
+    <a id="register" href="/register" class="btn btn-primary">Register</a>
+    <a id="login" href="/login" class="btn btn-primary ms-2">Sign in</a>
+  {{/user}}
+
+  {{#user}}
+    <a href="/events" class="btn btn-primary ms-2">View Events</a>
+    <a href="/new-event-entry" class="btn btn-info ms-2">Create an Event</a>
+    <a href="/manage-users" class="btn btn-success ms-2">Manage Family</a>
+    <a id="logout" href="/logout" class="btn btn-danger ms-2">Sign out</a>
+   Hi {{user}} {{family}} {{role}} 
+  {{/user}}
+
+  </div>
+   
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Add New Family Member</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" action="/add-user">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select class="form-control" id="role" name="role" required>
+                                <option value="member">Family Member</option>
+                                <option value="organiser">Organiser</option>
+                                <option value="administrator">Administrator</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Family Member</button>
+            </form>
+        </div>
+    </div>
+
+   
+    <div class="card">
+        <div class="card-header">
+            <h3>Current Family Members</h3>
+        </div>
+        <div class="card-body">
+            {{#users}}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <h5 class="card-title mb-1">{{fullName}}</h5>
+                            <p class="mb-1"><strong>Username:</strong> {{user}}</p>
+                            <span class="badge badge-secondary">{{role}}</span>
+                            {{#familyRole}}<span class="badge badge-info">{{familyRole}}</span>{{/familyRole}}
+                        </div>
+                        <div class="col-md-4 text-end">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <form action="/edit-user/{{user}}" method="get">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit" >Edit</button>
+                            </form>                             
+                            <form action="/delete-user/{{user}}" method="get">
+                                    <button class="btn btn-sm btn-outline-info" type="submit" >Delete</button>
+                            </form>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/users}}
+            
+            {{^users}}
+            <p class="text-muted">No family members found.</p>
+            {{/users}}
+        </div>
+    </div>
+
+    
+  
+    </body>
+</html>

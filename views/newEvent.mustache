@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>partials/header}}
+</head>
+<body class="container">
+  <h1>Create New Event</h1>
+      <div class="text-end" style="margin-bottom: 1em;">
+  {{^user}}
+    <a id="register" href="/register" class="btn btn-primary">Register</a>
+    <a id="login" href="/login" class="btn btn-primary ms-2">Sign in</a>
+  {{/user}}
+
+  {{#user}}
+    <a href="/events" class="btn btn-primary ms-2">View Events</a>
+    <a href="/new-event-entry" class="btn btn-info ms-2">Create an Event</a>
+    <a href="/manage-users" class="btn btn-success ms-2">Manage Family</a>
+    <a id="logout" href="/logout" class="btn btn-danger ms-2">Sign out</a>
+   Hi {{user}} {{family}} {{role}} 
+  {{/user}}
+
+  </div>
+      <form method="post" role="form" action="/new-event-entry">
+        <div class="form-group">
+          <label for="organiser">Organiser</label>
+          <input type="text" class="form-control" id="organiser" name="organiser" value={{user}} required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Event</label>
+          <input type="text" class="form-control" id="event" name="event" placeholder="Enter an Event Title" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="startTime">Start Time</label>
+              <input type="time" class="form-control" id="startTime" name="startTime" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="endTime">End Time</label>
+              <input type="time" class="form-control" id="endTime" name="endTime" required>
+            </div>
+          </div>
+        </div>
+         <div class="form-group">
+            <label for="participants">Select who is involved</label>    
+            <fieldset>
+                  
+                        {{#users}} 
+                        <div class="form-check-inline">
+                            <input type="checkbox" class="form-check-input" id="{{.}}" name="participants" value={{.}}  />
+                            <label class="form-check-label" for="{{.}}" >{{.}} </label>
+                        </div>
+                        {{/users}}
+              
+            </fieldset>  
+          </div>
+         <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" class="form-control" id="location" name="location" placeholder="Event location" required>
+        </div>
+        <div class="form-group">
+          <label for="eventType">Event Type</label>
+          <select class="form-control" id="eventType" name="eventType" required onchange="toggleRecurringOptions()">
+            <option value="ad-hoc">One-time Event</option>
+            <option value="recurring">Recurring Event</option>
+          </select>
+        </div>
+        <div class="form-group" id="recurringPattern" style="display: none;">
+          <label for="recurringFrequency">Recurring Pattern</label>
+          <select class="form-control" id="recurringFrequency" name="recurringPattern">
+            <option value="">Select frequency...</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+          <small class="form-text text-muted">This will create 12 future instances of the event</small>
+        </div>
+        <div class="form-group">
+          <label for="requiredItems">Required Items/Equipment</label>
+          <input type="text" class="form-control" id="requiredItems" name="requiredItems" placeholder="Items required to participate (e.g. swimming bag, towel, shampoo)" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description of Event</label>
+          <textarea class="form-control" id="description" name="description" placeholder="Enter Description of Event here." rows="3" required>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Create Event" class="btn btn-primary">
+        </div>
+      </form>
+      
+      <script>
+        function toggleRecurringOptions() {
+          const eventType = document.getElementById('eventType').value;
+          const recurringDiv = document.getElementById('recurringPattern');
+          const recurringSelect = document.getElementById('recurringFrequency');
+          
+          if (eventType === 'recurring') {
+            recurringDiv.style.display = 'block';
+            recurringSelect.required = true;
+          } else {
+            recurringDiv.style.display = 'none';
+            recurringSelect.required = false;
+            recurringSelect.value = '';
+          }
+        }
+      </script>
+</body>
+</html>
